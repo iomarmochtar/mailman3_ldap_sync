@@ -1,0 +1,39 @@
+; mailman3 api auth
+[mailman3]
+host = localhost
+port = 8001
+user = restadmin
+pwd = restpass
+
+; ldap auth 
+[ldap]
+host = 192.168.1.161
+port = 389
+ssl = false
+bind_dn = cn=admin,dc=iomarmochtar,dc=com
+bind_pwd = P@ssw0rd
+
+[sync]
+log_file = /var/log/mailman3_ldapsync.log ; log file for this script, put blank if you don't use
+default_list_domain = iomarmochtar.com ; default domain, will be named after the list. eg: kelompok@iomarmochtar.com
+group_filter = (&(objectClass=group)(msExchEnableModeration=TRUE))
+search_base = dc=iomarmochtar,dc=com
+subscriber_attr = member ; group member attribute from group filter result that will be used as list subscriber
+owner_attr = managedBy ; <same as above but for list owner >
+moderator_attr = msExchModeratedByLink ; <same as above but for list moderator >
+member_filter = (objectClass=person) ; member filter if result of subscriber or owner or moderator returned DN, this is used in AD
+mail_attr = mail 
+group_name_attr = cn ; name of list, if there is a space character then it will be replaced by dot (.) then lower cased
+delete_rest_list = true ; set this value to true for deleting the unmatch list in mailman
+exclude_list_re = ; fill this with regex pattern for exclude list deletion, if delete_rest_list is enabled (true)
+list_prefix = ; list prefix that will be appended in front, eg: kelompok@iomarmochtar.com to list-kelompok@iomarmochtar.com
+
+; hooks is some python code that will be executed after sync process are done, all hooks must be put in hooks folder
+; script will run method main in hook file, see the example 
+[hooks]
+; <ALIAS> = <HOOK FILE>
+;example_hook = example
+
+; hook configuration that will be injected to hook main function as argument
+;[example_hook]
+;postmap_path = /usr/sbin/postmap
