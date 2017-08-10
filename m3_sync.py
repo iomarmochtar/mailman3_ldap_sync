@@ -124,6 +124,8 @@ class M3Sync(object):
         get list with additional prefix if enabled
         """
         prefix = self.sync['list_prefix']
+        # lowercased
+        name = name.lower()
         if not prefix:
             return name
         return "{0}{1}".format(prefix, name)
