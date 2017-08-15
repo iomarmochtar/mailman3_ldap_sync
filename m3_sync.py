@@ -17,7 +17,7 @@ from six.moves.urllib_error import HTTPError
 from ldap3 import Server, Connection, ALL, ALL_ATTRIBUTES, BASE
 try:
     from ConfigParser import ConfigParser
-except ModuleNotFoundError:
+except ImportError:
     # for python 3
     from configparser import ConfigParser
 
@@ -101,7 +101,7 @@ class M3Sync(object):
         self.logger.addHandler(handler)
         self.logger.setLevel(log_lvl)
 
-        if self.sync['log_file']:
+        if 'log_file' in self.sync and self.sync['log_file']:
             fh = logging.FileHandler(self.sync['log_file'], 'a')
             fh.setLevel(log_lvl)
             fh.setFormatter(
