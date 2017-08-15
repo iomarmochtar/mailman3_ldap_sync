@@ -189,6 +189,9 @@ class M3Sync(object):
                         email = getattr(
                             self.ldap.entries[0], self.sync['mail_attr']).value
 
+                        if 'replace_mail_domain' in self.sync and self.sync['replace_mail_domain']:
+                             email = re.sub(r'@.*?$', '@{}'.format(self.sync['replace_mail_domain']), email)
+
                     # lower case the email
                     ldap_data[self.get_list(list_name)][attr].append(
                         email.lower())

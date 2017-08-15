@@ -18,6 +18,8 @@ bind_pwd = P@ssw0rd
 log_file = /var/log/mailman3_ldapsync.log
 ; default domain, will be named after the list. eg: kelompok@iomarmochtar.com
 default_list_domain = iomarmochtar.com
+; replacing owner, subscriber and moderator email domain, leave blank if not used
+replace_mail_domain = iomarmochtar.com
 group_filter = (&(objectClass=group)(msExchEnableModeration=TRUE))
 search_base = dc=iomarmochtar,dc=com
 ; group member attribute from group filter result that will be used as list subscriber
