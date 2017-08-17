@@ -139,7 +139,7 @@ class M3Sync(object):
             self.logger.info("Executing hook {0}".format(name))
             result = hook['module'].main(
                 conf=hook['conf'],
-                logger=self.logger,
+                instance=self,
                 data=ldap_data
             )
             if result:

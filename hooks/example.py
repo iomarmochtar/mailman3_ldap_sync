@@ -1,5 +1,5 @@
 
-def main(conf, logger, data):
+def main(conf, instance, data):
     """
     Example of hook file
 
@@ -7,4 +7,4 @@ def main(conf, logger, data):
     logger: <object> instance logger that used in main script
     data: <dict> cleaned result data based on ldap query
     """
-    logger.debug("inside example hook")
+    instance.logger.debug("inside example hook")
