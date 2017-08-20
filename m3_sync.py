@@ -214,6 +214,9 @@ class M3Sync(object):
                 list_name, self.sync['default_list_domain']))
             try:
                 mlist = domain.create_list(list_name)
+                # disable welcome message
+                mlist.settings['send_welcome_message'] = False
+                mlist.settings.save()
             except HTTPError:
                 self.logger.warn(
                     "List with name {0} already exists".format(list_name))
